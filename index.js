@@ -37,6 +37,13 @@ var FileSearch = function(options) {
             }
 
             async.each(files, function(file, callback) {
+
+		// Ignore hidden files
+		if (file.indexOf('.') === 0) {
+		    callback(null);
+		    return;
+		}
+
 		// Don't return error to callback or we will miss other files in directory
 		try {
 		    var strPath = path.join(strFolderName, file);
